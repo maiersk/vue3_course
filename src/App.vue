@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <dic class="row">
-      <AppHeader title="Learn Vue" :NavItems="navItems" @open-login-modal="isLoginOpen = true"/>
+      <AppHeader title="Learn Vue" :NavItems="navItems" :isLoggedIn="isLoggedIn" @open-login-modal="isLoginOpen = true"/>
 
       <div class="vw-100">
         <router-view></router-view>        
@@ -17,16 +17,9 @@
 <script>
 import AppHeader from "./components/AppHeader"
 import LoginModal from './components/LoginModal.vue'
+import firebase from "./utilities/firebase"
 
 export default {
-  emits: {
-    'open-login-modal': payload => {
-      return payload
-    },
-    'close-login': payload => {
-      return payload
-    }
-  },
   components: {
     AppHeader,
     LoginModal,
@@ -41,7 +34,20 @@ export default {
         {name: "Slider", href: "/slider"},
       ],
       isLoginOpen: false, 
+      isLoggedIn: false,
+      authUser: {},
     }
+  },
+  mounted() {
+    firebase.auth().onAuthStateChanged((user)=>{
+      if (user) {
+        this.isLoggedIn = true;
+        this.authUser = user;
+      } else {
+        this.isLoggedIn = false;
+        this.authUser = {};
+      }
+    })
   },
 }
 </script>

@@ -11,7 +11,11 @@
         </li>
       </ul>
       <div class="col-xl-2 col-lg-2 login_func my-auto d-flex justify-content-center">
-        <button class="col-xl-4 col-lg-4 btn bg-transparent text-white" @click="$emit('open-login-modal')">Login</button>
+        <button class="col-xl-4 col-lg-4 btn bg-transparent text-white"
+          @click="isLoggedIn ? logout() : $emit('open-login-modal')"
+        >
+          {{isLoggedIn ? 'Logout' : 'Login'}}
+        </button>
         <button class="col-xl-4 col-lg-4 btn bg-transparent text-white">Register</button>        
       </div>
     </div>
@@ -19,11 +23,23 @@
 </template>
 
 <script>
+import firebase from "../utilities/firebase";
+
 export default {
   name: "TopBar",
   props: {
     title: String,
-    NavItems: Array
+    NavItems: Array,
+    isLoggedIn: {type: Boolean, required: true},
+  },
+  methods: {
+    logout() {
+      firebase.auth().signOut().then((res) => {
+        console.log(res);
+      }).catch((err) => {
+        console.log(err);
+      })
+    }
   }
 }
 </script>
