@@ -5,6 +5,7 @@
       <section class="col-lg-12 d-flex justify-content-between vh-100">
         <article class="w-100 border">
           <textarea 
+            ref="MarkdownRef"
             class="h-100 w-100"
             :value="text"
             @input="updateText"
@@ -53,15 +54,18 @@ export default {
       text: "",
     };
   },
+  mounted() {
+    this.$refs.MarkdownRef.focus();
+  },
   methods: {
     markedText() {
-      return marked(this.text)
+      return marked(this.text);
     },
     updateText(e) {
-      const task = () => {this.text = e.target.value}
+      const task = () => {this.text = e.target.value};
       // 使用mixins的方法和数据都是和导入方对象组合
       // 导入方和mixins方法同名则用导入方的方法，date定义的内容也一样
-      this.debounce(task, 500)
+      this.debounce(task, 500);
     },
 
   },

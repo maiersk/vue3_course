@@ -25,7 +25,7 @@
         <!-- v.model.lazy -->
         <!-- v.model.number -->
         <form class="d-flex justify-content-center" @submit.prevent="addHero(newHero)">
-          <input v-model.trim="newHero.name"/>
+          <input ref="newHeroRef" v-model.trim="newHero.name"/>
           <button type="submit" :disabled="isDisabled">Add Hero</button>
         </form>  
       </div>       
@@ -50,45 +50,48 @@ export default {
       lname: "b"
     }
   },
+  mounted() {
+    this.$refs.newHeroRef.focus();
+  },
   watch: {
     //这种deep深度检测属性多的对象时候消耗性能
     // newHero: {
     //   handler: (nval, oval) => {
-    //    this.isDisabled = nval.name ? false : true
+    //    this.isDisabled = nval.name ? false : true;
     //   },
-    //   deep: true
+    //   deep: true,
     // }, 
     //建议使用字符串来表示对象的属性调用
     "newHero.name"(val) { 
-      this.isDisabled = val ? false : true
+      this.isDisabled = val ? false : true;
     }
   },
   computed: {
     fullname: {
       get() {
-        return `full name: ${this.fname} ${this.lname}`
+        return `full name: ${this.fname} ${this.lname}`;
       },
       set(fullname) {
-        const val = fullname.split(" ")
-        this.fname = val[0]
-        this.lname = val[1]
+        const val = fullname.split(" ");
+        this.fname = val[0];
+        this.lname = val[1];
       }
     }
   },
   methods: {
     addHero(hero) {
-      if (!this.newHero.name || this.newHero.name === "") return
-      this.heros.push(hero)
-      this.newHero = {}
+      if (!this.newHero.name || this.newHero.name === "") return;
+      this.heros.push(hero);
+      this.newHero = {};
     },
     delHero(index) {
       // this.heros.splice(i,1)
-      this.heros = this.heros.filter((hero, i) => i !== index)
+      this.heros = this.heros.filter((hero, i) => i !== index);
     },
 
     setfullname(val) {
       // computed fullname set方法
-      this.fullname = val 
+      this.fullname = val;
     }
   }
 }
