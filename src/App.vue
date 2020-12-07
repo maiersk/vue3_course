@@ -7,9 +7,10 @@
         <router-view></router-view>        
       </div>
 
-      <div class="vw-100" v-if="isLoginOpen">
+      <!-- 瞬移标签 到指定元素内 -->
+      <teleport to="#app" class="vw-100" v-if="isLoginOpen">
         <LoginModal @close-login="isLoginOpen = false"/>
-      </div>
+      </teleport>
     </dic>
   </div>
 </template>
