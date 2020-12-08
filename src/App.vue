@@ -33,6 +33,7 @@ export default {
         {name: "Calendar", href: "/calendar"},
         {name: "Markdown", href: "/markdown"},
         {name: "Slider", href: "/slider"},
+        {name: "Calculator", href: "/calculator"},
       ],
       isLoginOpen: false, 
       isLoggedIn: false,
