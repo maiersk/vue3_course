@@ -34,6 +34,7 @@ export default {
         {name: "Markdown", href: "/markdown"},
         {name: "Slider", href: "/slider"},
         {name: "Calculator", href: "/calculator"},
+        {name: "Modal", href: "/modal"},
       ],
       isLoginOpen: false, 
       isLoggedIn: false,
