@@ -20,8 +20,9 @@
 </template>
 
 <script>
-import marked from 'marked'
-import debounce from '../utilities/mixins/debounce'
+import marked from 'marked';
+// import debounce from '../utilities/mixins/debounce';
+import useDebounce from '../utilities/composition/useDebounce';
 
 export default {
     // beforeCreate() {
@@ -48,13 +49,16 @@ export default {
   // unmounted() {
   //   console.log('unmounted')
   // },
-  mixins: [debounce],
+  // mixins: [debounce],
   data() {
     return {
       text: "",
+      debounce: "",
     };
   },
   mounted() {
+    // 改用方法组件
+    this.debounce = useDebounce();
     this.$refs.MarkdownRef.focus();
   },
   methods: {
