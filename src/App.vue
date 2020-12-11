@@ -35,6 +35,7 @@ export default {
         {name: "Slider", href: "/slider"},
         {name: "Calculator", href: "/calculator"},
         {name: "Modal", href: "/modal"},
+        {name: "Chat", href: "/chat"},
       ],
       isLoginOpen: false, 
       isLoggedIn: false,
