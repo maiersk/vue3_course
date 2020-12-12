@@ -21,18 +21,21 @@
 <script>
 import {onMounted, reactive} from 'vue';
 import firebase, {chatsRef} from '../utilities/firebase';
+import {useStore} from 'vuex';
 
 export default {
   setup() {
     // reactive 和 ref 不同的是 ref对单一属性监听，reactive适用于对象所有属性监听
+    const sotre = useStore();
     const state = reactive({
       chats: [],
       message: "",
       collection: null,
-      userid: "",
+      userid: sotre.state.authUser.uid,
     })
 
     onMounted(async () => {
+      // 监听子项事件
       chatsRef.on("child_added", (snapshot) => {
         state.userid = firebase.auth().currentUser.uid;
         state.chats.push({key: snapshot.key, ...snapshot.val()});

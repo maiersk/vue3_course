@@ -29,8 +29,12 @@ export default {
   name: "TopBar",
   props: {
     title: String,
-    NavItems: Array,
-    isLoggedIn: {type: Boolean, required: true},
+    NavItems: Array
+  },
+  computed: {
+    isLoggedIn() {
+      return this.$store.state.isLoggedIn;
+    }
   },
   methods: {
     logout() {

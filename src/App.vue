@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <dic class="row">
-      <AppHeader title="Learn Vue" :NavItems="navItems" :isLoggedIn="isLoggedIn" @open-login-modal="isLoginOpen = true"/>
+      <AppHeader title="Learn Vue" :NavItems="navItems" @open-login-modal="isLoginOpen = true"/>
 
       <div class="vw-100">
         <router-view></router-view>        
@@ -38,18 +38,16 @@ export default {
         {name: "Chat", href: "/chat"},
       ],
       isLoginOpen: false, 
-      isLoggedIn: false,
-      authUser: {},
     }
   },
   mounted() {
     firebase.auth().onAuthStateChanged((user)=>{
       if (user) {
-        this.isLoggedIn = true;
-        this.authUser = user;
+        this.$store.commit("setIsLoggedIn", true);
+        this.$store.dispatch("setAuthUser", user);
       } else {
-        this.isLoggedIn = false;
-        this.authUser = {};
+        this.$store.commit("setIsLoggedIn", false);
+        this.$store.dispatch("setAuthUser", {});
       }
     })
   },
