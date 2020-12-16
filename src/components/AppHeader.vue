@@ -12,7 +12,7 @@
       </ul>
       <div class="col-xl-2 col-lg-2 login_func my-auto d-flex justify-content-center">
         <button class="col-xl-4 col-lg-4 btn bg-transparent text-white"
-          @click="isLoggedIn ? logout() : $emit('open-login-modal')"
+          @click="isLoggedIn ? logout() : openLogin()"
         >
           {{isLoggedIn ? 'Logout' : 'Login'}}
         </button>
@@ -43,7 +43,10 @@ export default {
       }).catch((err) => {
         console.log(err);
       })
-    }
+    },
+    openLogin() {
+      this.$store.commit("setLoginModal", true);
+    },
   }
 }
 </script>

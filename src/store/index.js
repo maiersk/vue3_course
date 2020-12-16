@@ -4,6 +4,7 @@ const store = createStore({
   state() {
     return {
       isLoggedIn: false,
+      isLoginOpen: false,
       authUser: {},
     }
   },
@@ -13,6 +14,9 @@ const store = createStore({
     },
     setAuthUser(state, payload) {
       state.authUser = payload;
+    },
+    setLoginModal(state, payload) {
+      state.isLoginOpen = payload;
     }
   },
   actions: {

@@ -1,15 +1,15 @@
 <template>
   <div class="container-fluid">
     <dic class="row">
-      <AppHeader title="Learn Vue" :NavItems="navItems" @open-login-modal="isLoginOpen = true"/>
+      <AppHeader title="Learn Vue" :NavItems="navItems" />
 
       <div class="vw-100">
         <router-view></router-view>        
       </div>
 
       <!-- 瞬移标签 到指定元素内 -->
-      <teleport to="#app" class="vw-100" v-if="isLoginOpen">
-        <LoginModal @close-login="isLoginOpen = false"/>
+      <teleport to="#app" class="vw-100" >
+        <LoginModal/>
       </teleport>
     </dic>
   </div>
@@ -37,7 +37,6 @@ export default {
         {name: "Modal", href: "/modal"},
         {name: "Chat", href: "/chat"},
       ],
-      isLoginOpen: false, 
     }
   },
   mounted() {

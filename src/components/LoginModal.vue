@@ -1,7 +1,7 @@
 <template>
-  <div class="login_div">
+  <div class="login_div" v-show="isLoginOpen">
     <section class="vw-100 h-100 d-flex fixed-top" style="background-color: rgba(0,0,0,0.3);z-index:20;"
-      @click="$emit('close-login')">
+      @click="close()">
     </section>
     <div class="vw-100 h-100">
       <div class="w-25 fixed-top mx-auto my-5 bg-light border rounded" style="z-index:30;">
@@ -32,7 +32,7 @@
           </form>
         </div>
       </div>   
-    </div>    
+    </div>   
   </div>
 </template>
 
@@ -44,6 +44,11 @@ export default {
   components: {
     GoogleLogin,
   },
+  computed: {
+    isLoginOpen() { 
+      return this.$store.state.isLoginOpen;
+    }
+  },
   data() {
     return {
       form: {
@@ -54,6 +59,9 @@ export default {
     }
   },
   mounted() {
+    // 该组件已经提前放入了页面，
+    // v-if初始值为 false 组件不会渲染无法操作dom，生命周期钩子不影响，v-if 的渲染是惰性的。
+    // 使用v-show无论状态如何都会渲染
     this.$refs.emailRef.focus();
   },
   methods: {
@@ -69,7 +77,7 @@ export default {
       })
     },
     close() {
-      this.$emit("close-login")
+      this.$store.commit("setLoginModal", false);
     }
   }
 }
