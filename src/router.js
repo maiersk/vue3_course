@@ -10,23 +10,17 @@ import Chat from "./pages/Chat";
 import store from "./store/index";
 
 const routes = [
-    {path: '/', component: Home},
-    {path: '/heros_list', component: HerosList},
-    {path: '/calendar', component: Calendar},
-    {path: '/markdown', component: Markdown},
-    {path: '/slider', component: Slider},
-    {path: '/calculator', component: Calculator},
-    {path: '/modal', component: ReuseableModal},
-    // vue中间件写法，beforEnter方法，在路由打开前执行
-    {path: '/chat', component: Chat,
-      meta: {middleware:'auth'},
-      beforeEnter: (_, __, next) => {
-        if (!store.state.isLoggedIn) {
-          next("/");  //跳转到其他路由地址
-        } else {
-          next();
-        }
-    }},
+  {path: '/', component: Home},
+  {path: '/heros_list', component: HerosList},
+  {path: '/calendar', component: Calendar},
+  {path: '/markdown', component: Markdown},
+  {path: '/slider', component: Slider},
+  {path: '/calculator', component: Calculator},
+  {path: '/modal', component: ReuseableModal},
+  // vue中间件写法，beforEnter方法，在路由打开前执行
+  {path: '/chat', component: Chat,
+    meta: {middleware:'auth'},
+  },
 ]
 
 const router = createRouter({
@@ -35,9 +29,17 @@ const router = createRouter({
 })
 
 // 全局路由器beforeEach方法
-router.beforeEach((to) => {
+router.beforeEach((to, _, next) => {
   if (to.meta.middleware) {
-    console.log(to.meta);    
+    // console.log(to.meta);    
+    const middleware = require(`./middleware/${to.meta.middleware}`);
+    if (middleware) {
+      middleware.default(next, store);
+    } else {
+      next();
+    }
+  } else {
+    next();
   }
 })
 
