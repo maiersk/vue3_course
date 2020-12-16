@@ -1,11 +1,11 @@
 <template>
   <div class="col-lg-12 Top-Bar vw-100">
     <div class="row">
-      <div class="col-xl-2 col-lg-2 d-flex justify-content-center align-items-center">
+      <div class="col-xl-3 col-lg-3 d-flex justify-content-center align-items-center">
         <img class="nav_logo mr-3" src="../assets/logo.png" alt="">
         <a class="text-center header_title">{{ title.toUpperCase() }}</a>
       </div>
-      <ul class="col-xl-6 col-lg-6 nav my-2 mx-auto mr-auto">
+      <ul class="col-xl-7 col-lg-7 nav my-2 mx-auto mr-auto">
         <li class="mr-2 nav-item pt-0" v-for="(nav, i) in NavItems" :key="i">
           <router-link class="nav-link" :to="nav.href">{{nav.name}}</router-link>
         </li>
