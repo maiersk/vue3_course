@@ -37,7 +37,7 @@ export default {
     onMounted(async () => {
       // 监听子项事件
       chatsRef.on("child_added", (snapshot) => {
-        state.userid = firebase.auth().currentUser.uid;
+        state.userid = firebase.auth().currentUser ? firebase.auth().currentUser.uid : "";
         state.chats.push({key: snapshot.key, ...snapshot.val()});
       })
     })
