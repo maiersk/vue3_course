@@ -36,6 +36,7 @@ export default {
         {name: "Calculator", href: "/calculator"},
         {name: "Modal", href: "/modal"},
         {name: "Chat", href: "/chat"},
+        {name: "User Crud", href: "/usercrud"},
       ],
     }
   },
