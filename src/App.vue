@@ -37,6 +37,7 @@ export default {
         {name: "Modal", href: "/modal"},
         {name: "Chat", href: "/chat"},
         {name: "User Crud", href: "/usercrud"},
+        {name: "tensorflow", href: "/tensorflow"},
       ],
     }
   },

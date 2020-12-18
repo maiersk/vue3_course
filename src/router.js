@@ -9,6 +9,7 @@ import ReuseableModal from "./pages/ReuseableModal";
 import Chat from "./pages/Chat";
 import UserCrud from "./pages/UserCrud";
 import store from "./store/index";
+import Tensorflow from "./pages/Tensorflow";
 
 const routes = [
   {path: '/', component: Home},
@@ -23,6 +24,7 @@ const routes = [
     meta: {middleware:'auth'},
   },
   {path: '/usercrud', component: UserCrud},
+  {path: '/tensorflow', component: Tensorflow},
 ]
 
 const router = createRouter({
